@@ -1,0 +1,136 @@
+/* Blog Specific Styles inheriting from main aesthetic */
+
+.blog-container {
+    max-width: 800px;
+    /* Thinner layout for text readability */
+    justify-content: flex-start;
+    padding-top: 4rem;
+    padding-bottom: 8rem;
+    /* Make room for the mascot at the bottom */
+}
+
+.home-link {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.home-link:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px #ffffff;
+}
+
+.blog-feed {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+/* Individual Blog Entry */
+.blog-entry {
+    background: var(--box-bg);
+    border: 1px solid var(--box-border);
+    padding: 2rem;
+    position: relative;
+    border-radius: 4px;
+}
+
+.blog-entry::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background-color: var(--box-border);
+}
+
+.entry-header {
+    border-bottom: 1px dotted var(--box-border);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.entry-title {
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.entry-meta {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    display: flex;
+    gap: 2rem;
+}
+
+.entry-tags {
+    color: var(--accent-color);
+}
+
+.entry-content {
+    color: var(--text-primary);
+    line-height: 1.8;
+}
+
+.entry-content p {
+    margin-bottom: 1rem;
+}
+
+/* Ensure footer can contain the absolute mascot */
+.footer-bar {
+    position: relative;
+    /* In case body doesn't stretch 100vh naturally, let's just make sure footer stays at bottom if needed, 
+       but absolute positioning relies on relative. */
+}
+
+/* Transparent Notepad Mascot Styling */
+.notepad-mascot {
+    position: absolute;
+    /* Bottom 100% means it sits perfectly on the top edge of its relative parent */
+    bottom: 100%;
+    margin-bottom: 1px;
+    /* Slight nudge down to offset any built-in image padding or baseline gaps */
+    right: 0;
+    /* No gap with the right edge */
+    width: 350px;
+    z-index: 100;
+    pointer-events: none;
+    /* Let clicks pass through the mascot */
+}
+
+.notepad-mascot img {
+    display: block;
+    /* Removes inline spacing */
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+    opacity: 0.85;
+}
+
+/* If the image's background is white and we want it to go away on dark:
+.notepad-mascot img {
+    mix-blend-mode: multiply; or difference;
+    filter: brightness(0.8) contrast(1.2);
+}
+}
+*/
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .notepad-mascot {
+        width: 180px;
+        /* Scale down so it doesn't cover text on phones */
+    }
+
+    .blog-container {
+        padding-top: 1.5rem;
+        padding-bottom: 4rem;
+    }
+
+    .entry-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}

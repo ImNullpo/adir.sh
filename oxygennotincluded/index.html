@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oxygen Not Included Playlist - ADIR.SH</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="../icons/page-icon.jpg">
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Override body height to allow scrolling if the window is too small for the video */
+        body {
+            height: auto;
+            min-height: 100vh;
+            overflow-y: auto;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border: 1px solid var(--box-border);
+            border-radius: 4px;
+            background: #000;
+            margin-bottom: 1.5rem;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .return-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s ease;
+            position: absolute;
+            right: 0;
+        }
+
+        .return-link:hover {
+            color: var(--accent-color);
+        }
+
+        .status-header {
+            display: flex;
+            align-items: center;
+            position: relative;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="site-title">[ ONI_PLAYLIST ]</h1>
+            <p class="site-subtitle">Oxygen Not Included - Video Archive</p>
+        </header>
+
+        <!-- Main Content Box -->
+        <main class="content-box">
+            <div class="box-title">// PLAYLIST_VIEWER</div>
+
+            <div class="video-container">
+                <iframe
+                    src="https://www.youtube.com/embed/videoseries?list=PLeV-4NZNRuN2bLKDUBbc3NyfWjU7hWF6x&autoplay=1"
+                    title="Oxygen Not Included Playlist"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <div class="status-divider"></div>
+            <div class="status-header">
+                <div class="status">STATUS: <span class="status-text">PLAYING</span></div>
+                <a href="../index.html" class="return-link">[ RETURN_TO_ROOT ]</a>
+            </div>
+
+            <div class="box-corner-accent"></div>
+        </main>
+
+        <!-- Notice -->
+        <div class="notice">
+            <span class="prompt">></span> <span id="notice-text">[ NOTICE ]: ENJOY THE PLAYLIST</span>
+        </div>
+    </div>
+
+    <!-- Footer Bar to match original site -->
+    <footer class="footer-bar">
+        <div class="footer-left">
+        </div>
+    </footer>
+</body>
+
+</html>

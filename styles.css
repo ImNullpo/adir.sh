@@ -1,0 +1,335 @@
+:root {
+    --bg-color: #0a0a0c;
+    --text-primary: #d4d4d4;
+    --text-muted: #808080;
+    --accent-color: #e0e6ed;
+    /* Soft, pale white/grey to match the mascot */
+    --accent-glow: rgba(224, 230, 237, 0.3);
+    --box-bg: rgba(20, 20, 25, 0.4);
+    --box-border: #2a2a30;
+
+    --font-main: 'Space Mono', 'Courier New', Courier, monospace;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    line-height: 1.6;
+    height: 100vh;
+    /* Lock height to viewport */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* Force removal of all unnecessary scrollbars */
+}
+
+/* Container */
+.page-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Header */
+.header {
+    width: 100%;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--box-border);
+    padding-bottom: 1rem;
+}
+
+.site-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-shadow: 0 0 10px var(--accent-glow);
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+}
+
+.site-subtitle {
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+/* Main Content Box */
+.content-box {
+    width: 100%;
+    background: var(--box-bg);
+    border: 1px solid var(--box-border);
+    border-radius: 4px;
+    padding: 2.5rem;
+    position: relative;
+    margin-bottom: 2rem;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.box-corner-accent {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    width: 20px;
+    height: 20px;
+    border-top: 2px solid var(--accent-color);
+    border-right: 2px solid var(--accent-color);
+    box-shadow: 2px -2px 5px var(--accent-glow);
+}
+
+.box-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+.text-content {
+    flex: 1;
+}
+
+.box-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+}
+
+.bio {
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+}
+
+.bio p {
+    margin-bottom: 0.5rem;
+}
+
+.status-divider {
+    height: 1px;
+    background: repeating-linear-gradient(to right,
+            var(--box-border),
+            var(--box-border) 2px,
+            transparent 2px,
+            transparent 4px);
+    margin: 1.5rem 0;
+    width: 100%;
+}
+
+.status {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.status-text {
+    color: var(--accent-color);
+    margin-left: 0.5rem;
+}
+
+/* Profile Image */
+.profile-container {
+    flex-shrink: 0;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    border: 2px solid var(--box-border);
+    padding: 10px;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-container::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, transparent 70%, var(--accent-color) 100%);
+    animation: rotate 4s linear infinite;
+    z-index: 0;
+    opacity: 0.5;
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 5%;
+    border-radius: 50%;
+    z-index: 1;
+    position: relative;
+    filter: grayscale(10%) contrast(110%);
+    background-color: #111;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Notice */
+.notice {
+    width: 100%;
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.prompt {
+    font-weight: bold;
+}
+
+#notice-text {
+    opacity: 0.8;
+}
+
+/* Footer Bar */
+.footer-bar {
+    background: #050505;
+    border-top: 1px solid var(--box-border);
+    padding: 0.8rem 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+
+    /* Make the footer sticky to the bottom of the screen */
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.footer-left {
+    position: relative;
+    width: 60px;
+    /* Provides space for absolute icon */
+    height: 20px;
+}
+
+.crystal-icon {
+    width: 75px;
+    height: 75px;
+    object-fit: contain;
+    position: absolute;
+    bottom: 0;
+    left: -10px;
+    /* Use transform to push the diamond down instead of negative bottom, preventing scroll bounds overflow */
+    transform: translateY(27.6px);
+    filter: drop-shadow(0 0 5px var(--accent-glow));
+    cursor: pointer;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.crystal-icon:hover {
+    transform: translateY(27.6px) scale(1.1);
+    filter: drop-shadow(0 0 10px var(--accent-color));
+}
+
+.crystal-icon:active {
+    transform: translateY(27.6px) scale(0.95);
+}
+
+.icon-placeholder {
+    width: 16px;
+    height: 16px;
+    background-color: var(--text-muted);
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.icon-placeholder:hover {
+    background-color: var(--accent-color);
+}
+
+/* Basic mask icons (if SVG masks are loaded, or just simple colored squares for now) */
+.sys-icon {
+    background-color: var(--accent-color);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+.git-icon {
+    clip-path: circle(50% at 50% 50%);
+}
+
+.in-icon {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.yt-icon {
+    clip-path: polygon(10% 20%, 90% 20%, 90% 80%, 10% 80%);
+    border-radius: 4px;
+}
+
+.dc-icon {
+    clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+}
+
+.term-icon {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    body {
+        height: auto;
+        min-height: 100vh;
+        overflow-y: auto;
+        /* Restore vertical scrolling on mobile */
+    }
+
+    .page-container {
+        padding: 1rem;
+    }
+
+    .content-box {
+        padding: 1.5rem;
+    }
+
+    .box-inner {
+        flex-direction: column-reverse;
+        /* Stacks image above text */
+        text-align: center;
+    }
+
+    .profile-container {
+        margin-bottom: 1.5rem;
+        width: 150px;
+        height: 150px;
+    }
+
+    .footer-bar {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}

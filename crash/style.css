@@ -1,0 +1,96 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #000;
+}
+
+#catImage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vmin;
+    height: 100vmin;
+    object-fit: contain;
+    z-index: 1;
+    transition: filter 0.05s, transform 0.05s;
+}
+
+#container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.glitch {
+    animation: glitchAnim 0.1s infinite alternate;
+}
+
+@keyframes glitchAnim {
+    0% {
+        opacity: 1;
+        filter: invert(0%) hue-rotate(0deg);
+    }
+
+    50% {
+        opacity: 0.8;
+        filter: invert(50%) hue-rotate(90deg);
+    }
+
+    100% {
+        opacity: 0.9;
+        filter: invert(100%) hue-rotate(180deg);
+    }
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/* 
+   Hardware-accelerated CSS animations 
+   These stress the compositor and GPU memory when spawned in large numbers
+*/
+.leaked-node {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle, rgba(255, 0, 0, 0.5) 0%, transparent 70%);
+    mix-blend-mode: screen;
+    animation: spin 1s infinite linear;
+    will-change: transform, filter;
+    /* Force GPU layer */
+    filter: drop-shadow(0 0 50px red) hue-rotate(90deg);
+    pointer-events: none;
+}
+
+@keyframes spin {
+    0% {
+        transform: translate3d(-50%, -50%, 0) rotateX(0) rotateY(0) rotateZ(0) scale(1);
+    }
+
+    50% {
+        transform: translate3d(-20%, -20%, 500px) rotateX(180deg) rotateY(180deg) rotateZ(180deg) scale(2);
+        filter: drop-shadow(0 0 100px yellow) hue-rotate(180deg);
+    }
+
+    100% {
+        transform: translate3d(-50%, -50%, 0) rotateX(360deg) rotateY(360deg) rotateZ(360deg) scale(1);
+    }
+}

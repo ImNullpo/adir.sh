@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADIR.SH | Threat Analysis</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="../icons/page-icon.jpg">
+    <link rel="stylesheet" href="../styles.css"> <!-- Base styles -->
+    <link rel="stylesheet" href="styles.css"> <!-- Scanner specific styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="page-container scanner-container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="site-title"><a href="../index.html" class="home-link">[ ADIR.SH ]</a> / SCANNER</h1>
+            <p class="site-subtitle">Automated threat intelligence</p>
+        </header>
+
+        <!-- Main Scanner Interface -->
+        <main class="scanner-interface box-container">
+            <h2 class="box-title">// URL_ANALYSIS</h2>
+
+            <div class="info-section">
+                <p>> Target domains are queried against current intelligence databases.</p>
+                <p>> Any URL found within the provided text will be automatically extracted and scanned.</p>
+                <p class="typing-notice">>> STATUS: AWAITING_INPUT<span class="cursor">_</span></p>
+            </div>
+
+            <div class="input-section">
+                <label for="url-input" class="input-label">>> ENTER_TARGET:</label>
+                <div class="input-wrapper">
+                    <span class="prompt">$</span>
+                    <input type="text" id="url-input" class="terminal-input" placeholder="Paste URL or message text..."
+                        autocomplete="off">
+                </div>
+                <button id="scan-btn" class="terminal-btn" onclick="scanUrl()">[ EXECUTE_SCAN ]</button>
+            </div>
+
+            <!-- Dynamic Results Area -->
+            <div id="scan-result" class="result-area hidden"></div>
+        </main>
+    </div>
+
+    <!-- Footer Bar -->
+    <footer class="footer-bar">
+        <div class="footer-left">
+        </div>
+
+        <!-- Phishing Mascot fixed at bottom left, inside the footer flow to scroll -->
+        <div class="phishing-mascot">
+            <img src="../images/phishing.png" alt="Mascot">
+        </div>
+    </footer>
+
+    <!-- Global script -->
+    <script src="../script.js"></script>
+    <!-- Phishing script -->
+    <script src="script.js"></script>
+</body>
+
+</html>
