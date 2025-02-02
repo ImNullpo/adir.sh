@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #020206;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Full-screen twinkling starfield canvas */
+#stars-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* ASCII Saturn art — floats above the starfield */
+#ascii-canvas {
+    position: relative;
+    z-index: 1;
+    font-family: 'Fira Code', 'Courier New', Courier, monospace;
+    white-space: pre;
+    user-select: none;
+    color: #c8d4e8;
+    text-shadow: 0 0 4px rgba(140, 170, 255, 0.25);
+    text-align: center;
+}
