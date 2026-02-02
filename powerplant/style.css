@@ -1,0 +1,156 @@
+:root {
+    --color-bg: #050505;
+    --color-amber: #ffb000;
+    --color-amber-dim: #b37b00;
+    --color-green: #39ff14;
+    --color-green-dim: #1f8c0b;
+    --color-text: #cccccc;
+    --font-stack: 'Share Tech Mono', 'Courier New', monospace;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-amber);
+    font-family: var(--font-stack);
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+}
+
+/* CRT Overlay Effect */
+.crt-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%,
+            rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg,
+            rgba(255, 0, 0, 0.06),
+            rgba(0, 255, 0, 0.02),
+            rgba(0, 0, 255, 0.06));
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.6;
+}
+
+.terminal-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* 75% Height Main Viewport */
+#viewport {
+    flex: 3;
+    /* Approx 75% */
+    background-color: #000;
+    border: 2px solid var(--color-amber);
+    box-shadow: 0 0 10px var(--color-amber-dim);
+    margin-bottom: 1rem;
+    overflow: hidden;
+    white-space: pre;
+    /* Essential for ASCII */
+    font-size: 14px;
+    /* Base size, JS will adjust cols/rows to fit */
+    line-height: 14px;
+    /* Square-ish grid */
+    color: var(--color-amber);
+    display: flex;
+    align-items: center;
+    /* Center content if grid is smaller than container */
+    justify-content: center;
+}
+
+/* 25% Height Status Bar */
+#status-bar {
+    flex: 1;
+    /* Approx 25% */
+    display: flex;
+    gap: 1rem;
+    border: 2px solid var(--color-green);
+    box-shadow: 0 0 10px var(--color-green-dim);
+    padding: 1rem;
+    background-color: #0a0a10;
+    color: var(--color-green);
+    overflow: hidden;
+}
+
+.status-panel {
+    flex: 1;
+    border-right: 1px dashed var(--color-green-dim);
+    padding-right: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.status-panel:last-child {
+    border-right: none;
+}
+
+.status-panel.log {
+    font-size: 0.9rem;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    color: var(--color-text);
+}
+
+.data-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+}
+
+.value {
+    font-weight: bold;
+}
+
+.warning {
+    color: var(--color-amber);
+}
+
+.danger {
+    color: #ff3333;
+    text-shadow: 0 0 5px red;
+}
+
+.blink {
+    animation: blinker 1s linear infinite;
+}
+
+.blink-cursor {
+    animation: blinker 0.8s step-end infinite;
+    display: inline-block;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Responsive adjustment for small screens logic if needed */
+@media (max-width: 768px) {
+    #status-bar {
+        flex-direction: column;
+    }
+
+    .status-panel {
+        border-right: none;
+        border-bottom: 1px dashed var(--color-green-dim);
+        padding-bottom: 0.5rem;
+    }
+}

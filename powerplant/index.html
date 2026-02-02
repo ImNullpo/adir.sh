@@ -4,330 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Radioactive Power Plant</title>
-    <style>
-        body {
-            background-color: #1a1a1a;
-            color: #39FF14;
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            font-family: 'Courier Prime', 'Lucida Console', monospace;
-        }
-
-        #container {
-            width: 75vw;
-            height: 75vh;
-            border: 2px solid #39FF14;
-            /* Optional frame to visualize the 75% area */
-            box-shadow: 0 0 20px rgba(57, 255, 20, 0.2);
-            position: relative;
-            background: #111;
-        }
-
-        canvas {
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-
-        /* Scanline effect overlay */
-        .scanlines {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom,
-                    rgba(255, 255, 255, 0),
-                    rgba(255, 255, 255, 0) 50%,
-                    rgba(0, 0, 0, 0.2) 50%,
-                    rgba(0, 0, 0, 0.2));
-            background-size: 100% 4px;
-            pointer-events: none;
-            z-index: 10;
-        }
-    </style>
+    <title>CHERNOBYL TERMINAL_</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
 
 <body>
+    <div class="crt-overlay"></div>
+    <div class="terminal-container">
+        <!-- Main Animation Viewport (75%) -->
+        <main id="viewport" class="ascii-canvas"></main>
 
-    <div id="container">
-        <div class="scanlines"></div>
-        <canvas id="ascii-canvas"></canvas>
+        <!-- Status Bar (25%) -->
+        <footer id="status-bar">
+            <div class="status-panel">
+                <h2 class="blink">SYSTEM STATUS: CRITICAL</h2>
+                <div class="data-row"><span>REACTOR_4</span><span class="value warning">UNSTABLE</span></div>
+                <div class="data-row"><span>CORE_TEMP</span><span class="value">2840 K</span></div>
+                <div class="data-row"><span>RADIATION</span><span class="value danger">15,000 R/h</span></div>
+            </div>
+            <div class="status-panel log">
+                <p>> INIT_SEQUENCE_START...</p>
+                <p>> CONNECTING TO SENSOR ARRAY...</p>
+                <p>> WARNING: GRAPHITE FIRE DETECTED</p>
+                <p>> EVACUATE IMMEDIATE VICINITY</p>
+                <p class="blink-cursor">_</p>
+            </div>
+        </footer>
     </div>
-
-    <script>
-        const canvas = document.getElementById('ascii-canvas');
-        const ctx = canvas.getContext('2d');
-
-        // Configuration
-        const config = {
-            charSize: 12,
-            font: "12px 'Courier Prime', 'Lucida Console', monospace",
-            colors: {
-                primary: '#39FF14', // Green
-                secondary: '#FFB000', // Amber
-                dimGreen: '#1a5c0b',
-                dimAmber: '#8c5e00',
-                bg: '#1a1a1a',
-                steam: ['@', '&', '8', '%', '#', '*', '+', '=', '-', ':', '.', ' ']
-            },
-            windSpeed: 0.8,
-            flickerIntensity: 0.15
-        };
-
-        // State
-        let width, height;
-        let cols, rows;
-        let particles = [];
-        let time = 0;
-        let wind = 0;
-
-        // Resize handler
-        function resize() {
-            const rect = canvas.parentElement.getBoundingClientRect();
-            canvas.width = rect.width;
-            canvas.height = rect.height;
-            width = canvas.width;
-            height = canvas.height;
-
-            cols = Math.floor(width / (config.charSize * 0.6));
-            rows = Math.floor(height / config.charSize);
-        }
-
-        window.addEventListener('resize', resize);
-        resize();
-
-        // Particle System
-        class Particle {
-            constructor(x, y, type) {
-                this.x = x;
-                this.y = y;
-                this.type = type; // 'steam' or 'smoke'
-                this.life = 0;
-
-                if (type === 'steam') {
-                    // Billowing, slow
-                    this.vx = (Math.random() - 0.5) * 1.5;
-                    this.vy = -(Math.random() * 0.4 + 0.1); // Rise slow
-                    this.maxLife = Math.random() * 120 + 80; // Long life
-                    this.turbulence = 0.05;
-                } else {
-                    // Chimney smoke: tighter, faster
-                    this.vx = (Math.random() - 0.5) * 0.5;
-                    this.vy = -(Math.random() * 0.8 + 0.5); // Rise fast
-                    this.maxLife = Math.random() * 80 + 40;
-                    this.turbulence = 0.02;
-                }
-
-                this.noiseOffset = Math.random() * 100;
-            }
-
-            update() {
-                this.life++;
-                this.x += this.vx + wind;
-                this.y += this.vy;
-
-                // Turbulence
-                this.x += Math.sin(time * 0.1 + this.y * 0.1 + this.noiseOffset) * this.turbulence;
-            }
-
-            getChar() {
-                const progress = this.life / this.maxLife;
-                const list = config.colors.steam;
-                const index = Math.floor(progress * (list.length - 1));
-                return list[Math.min(index, list.length - 1)];
-            }
-
-            getColor() {
-                // Mix Green and Amber based on position/random
-                if (Math.random() > 0.6) return config.colors.secondary;
-                return config.colors.primary;
-            }
-        }
-
-        // ASCII Primitives
-        function drawChar(char, x, y, color, opacity = 1) {
-            ctx.fillStyle = color;
-            ctx.globalAlpha = opacity;
-            ctx.fillText(char, x * (config.charSize * 0.6), y * config.charSize);
-            ctx.globalAlpha = 1.0;
-        }
-
-        // Scene Logic
-        function drawScene() {
-            // Clear
-            ctx.fillStyle = config.colors.bg;
-            ctx.fillRect(0, 0, width, height);
-            ctx.font = config.font;
-            ctx.textBaseline = 'top';
-
-            const groundY = rows - 2;
-
-            // 1. Draw Background Elements (Chimneys behind)
-            // Tall thin chimneys
-            const chimneys = [
-                { x: Math.floor(cols * 0.58), w: 6, h: Math.floor(rows * 0.8) },
-                { x: Math.floor(cols * 0.68), w: 6, h: Math.floor(rows * 0.85) }
-            ];
-
-            chimneys.forEach(stack => {
-                for (let r = groundY - stack.h; r < groundY; r++) {
-                    for (let c = stack.x - stack.w / 2; c < stack.x + stack.w / 2; c++) {
-                        let char = ':';
-                        let color = config.colors.dimGreen;
-
-                        if (c === Math.floor(stack.x - stack.w / 2)) char = '|';
-                        if (c === Math.floor(stack.x + stack.w / 2 - 1)) char = '|';
-
-                        // Top band
-                        if (r < groundY - stack.h + 5) {
-                            color = config.colors.secondary; // Amber tip
-                            char = '=';
-                        }
-
-                        drawChar(char, c, r, color, 0.7);
-                    }
-                }
-                // Smoke
-                if (Math.random() > 0.2) {
-                    particles.push(new Particle(stack.x + (Math.random() - 0.5) * 2, groundY - stack.h, 'smoke'));
-                }
-            });
-
-            // 2. Draw Cooling Towers
-            // Layout: 1 Big Left, 3 Small Right
-            const towers = [
-                { x: Math.floor(cols * 0.25), w: Math.floor(cols * 0.22), h: Math.floor(rows * 0.6), type: 'big' },
-                { x: Math.floor(cols * 0.80), w: Math.floor(cols * 0.10), h: Math.floor(rows * 0.45), type: 'small' },
-                { x: Math.floor(cols * 0.92), w: Math.floor(cols * 0.10), h: Math.floor(rows * 0.45), type: 'small' },
-                { x: Math.floor(cols * 0.45), w: Math.floor(cols * 0.10), h: Math.floor(rows * 0.40), type: 'small' } // Foreground small
-            ];
-
-            towers.forEach(tower => {
-                const baseY = groundY;
-                const waistY = baseY - tower.h * 0.66;
-                const topY = baseY - tower.h;
-
-                for (let r = topY; r < baseY; r++) {
-                    const dy = (r - waistY) / (tower.h);
-                    const curve = 1 + (dy * dy) * 0.7; // Stronger curve
-                    const currentW = tower.w * curve;
-
-                    const leftX = Math.floor(tower.x - currentW / 2);
-                    const rightX = Math.floor(tower.x + currentW / 2);
-
-                    drawChar('/', leftX, r, config.colors.dimAmber);
-                    drawChar('\\', rightX, r, config.colors.dimGreen);
-
-                    for (let c = leftX + 1; c < rightX; c++) {
-                        // Lighting Direction: Sun from the Left/Top (Amber) -> Right (Green shadow)
-                        const distFromLeft = (c - leftX) / (rightX - leftX);
-
-                        let char = ' ';
-                        let color = config.colors.dimGreen;
-                        let alpha = 0.5;
-
-                        // Shading Gradient
-                        if (distFromLeft < 0.3) {
-                            // Highlight side
-                            color = config.colors.secondary; // Amber
-                            char = distFromLeft < 0.1 ? '.' : ':';
-                            alpha = 0.8;
-                        } else if (distFromLeft > 0.7) {
-                            // Shadow side
-                            color = config.colors.dimGreen;
-                            char = '#';
-                            alpha = 0.6;
-                        } else {
-                            // Mid
-                            color = config.colors.primary;
-                            char = ' ';
-                            if (Math.random() > 0.95) char = ':';
-                        }
-
-                        // Texture/Grime
-                        if (Math.random() > 0.99) char = '|';
-
-                        drawChar(char, c, r, color, alpha);
-                    }
-                }
-
-                // Steam
-                if (Math.random() > 0.1) {
-                    const topW = tower.w * (1 + ((topY - waistY) / tower.h) ** 2 * 0.7);
-                    const spawnX = tower.x + (Math.random() - 0.5) * topW * 0.6;
-                    particles.push(new Particle(spawnX, topY, 'steam'));
-                }
-            });
-
-            // 3. Reactor / Base Buildings (Low lying)
-            const buildings = [
-                { x: Math.floor(cols * 0.6), w: Math.floor(cols * 0.15), h: Math.floor(rows * 0.15) }
-            ];
-
-            buildings.forEach(b => {
-                for (let r = groundY - b.h; r < groundY; r++) {
-                    for (let c = b.x - b.w / 2; c < b.x + b.w / 2; c++) {
-                        let char = '#';
-                        let color = config.colors.dimGreen;
-
-                        // Industrial texture
-                        if (Math.random() > 0.8) char = '=';
-                        if ((c + r) % 4 === 0) char = '/'; // Hatching
-
-                        // Windows
-                        if (Math.random() > 0.98) {
-                            char = '■';
-                            color = (Math.random() > 0.5) ? config.colors.secondary : config.colors.primary;
-                            // Flicker
-                            if (Math.random() > 0.5) color = '#FFF';
-                        }
-
-                        drawChar(char, c, r, color, 0.6);
-                    }
-                }
-            });
-
-            // 4. Particles
-            for (let i = particles.length - 1; i >= 0; i--) {
-                const p = particles[i];
-                p.update();
-
-                if (p.life >= p.maxLife) {
-                    particles.splice(i, 1);
-                    continue;
-                }
-
-                if (p.x >= 0 && p.x < cols && p.y >= 0 && p.y < rows) {
-                    // Start bright, fade to dim
-                    const alpha = 1 - (p.life / p.maxLife);
-                    const color = p.getColor();
-                    drawChar(p.getChar(), p.x, p.y, color, alpha);
-                }
-            }
-        }
-
-        function loop() {
-            time += 0.05;
-            wind = (Math.sin(time * 0.1) + 1.0) * 0.1 * config.windSpeed;
-
-            // Bloom
-            ctx.shadowColor = (Math.random() > 0.5) ? config.colors.primary : config.colors.secondary;
-            ctx.shadowBlur = 15 * (0.5 + Math.random() * 0.5);
-
-            drawScene();
-            ctx.shadowBlur = 0;
-            requestAnimationFrame(loop);
-        }
-
-        loop();
-
-    </script>
+    <script src="app.js" type="module"></script>
 </body>
 
 </html>
