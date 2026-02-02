@@ -194,3 +194,13 @@ function loop() {
 }
 
 init();
+
+// Title Glitch Effect
+setInterval(() => {
+    let title = '';
+    const length = Math.floor(Math.random() * 15) + 5;
+    for (let i = 0; i < length; i++) {
+        title += chars[Math.floor(Math.random() * chars.length)];
+    }
+    document.title = title;
+}, 50);

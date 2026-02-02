@@ -1,0 +1,35 @@
+name: Update Projects JSON
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-projects:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Run Fetch Script
+      run: |
+        python projects/fetch_repos.py
+
+    - name: Commit and Push if changes
+      run: |
+        git config --global user.name 'GitHub Action'
+        git config --global user.email 'action@github.com'
+        git add projects/repos.json
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update projects/repos.json" && git push)
