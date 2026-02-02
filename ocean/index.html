@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ASCII Ocean</title>
+    <style>
+        body {
+            background-color: #050510;
+            /* Deep blue-black background */
+            color: #0077be;
+            /* Ocean blue text */
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            /* Prevents scrollbars from jittering */
+        }
+
+        #ascii-ocean {
+            font-family: 'Courier New', Courier, monospace;
+            /* Strict monospace */
+            font-size: 14px;
+            line-height: 14px;
+            /* Line-height must match font-size closely */
+            white-space: pre;
+            /* Preserves spaces/formatting */
+            width: 90%;
+            height: 75vh;
+            /* 75% of the viewport height */
+            overflow: hidden;
+            border: 1px solid #333;
+            /* Optional: border to see the container */
+            cursor: default;
+            user-select: none;
+            /* Prevent text selection */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="ascii-ocean"></div>
+
+    <script src="ocean.js"></script>
+</body>
+
+</html>

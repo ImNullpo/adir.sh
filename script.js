@@ -13,11 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Toggle Cbox Minimize
     cboxToggle.addEventListener('click', (e) => {
         e.stopPropagation();
-        cboxWidget.classList.toggle('minimized');
-    });
-
-    document.querySelector('.cbox-header').addEventListener('click', () => {
-        cboxWidget.classList.toggle('minimized');
+        cboxWidget.classList.add('hidden');
+        cboxWidget.classList.remove('minimized');
     });
 
     // --- Terminal Toggle Button Logic (Easter Egg) ---
