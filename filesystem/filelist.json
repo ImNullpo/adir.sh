@@ -1,0 +1,44 @@
+[
+    {
+        "name": "nadav",
+        "path": "nadav",
+        "type": "DIR",
+        "size": "-",
+        "children": []
+    },
+    {
+        "name": "personal",
+        "path": "personal",
+        "type": "DIR",
+        "size": "-",
+        "children": []
+    },
+    {
+        "name": "shachar",
+        "path": "shachar",
+        "type": "DIR",
+        "size": "-",
+        "children": []
+    },
+    {
+        "name": "yariv",
+        "path": "yariv",
+        "type": "DIR",
+        "size": "-",
+        "children": []
+    },
+    {
+        "name": "501eb87a2fb82d0392b006196f264d7e(1).jpg",
+        "path": "501eb87a2fb82d0392b006196f264d7e(1).jpg",
+        "type": "JPG",
+        "size": "903.97 KB",
+        "url": "files/501eb87a2fb82d0392b006196f264d7e(1).jpg"
+    },
+    {
+        "name": "welcome.txt",
+        "path": "welcome.txt",
+        "type": "TXT",
+        "size": "75.0 B",
+        "url": "files/welcome.txt"
+    }
+]

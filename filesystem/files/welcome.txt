@@ -1,0 +1,3 @@
+Welcome to the secure filesystem.
+Access is monitored.
+Have a nice day.

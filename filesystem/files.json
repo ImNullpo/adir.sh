@@ -1,0 +1,20 @@
+[
+    {
+        "name": "welcome.txt",
+        "type": "TXT",
+        "size": "2KB",
+        "url": "files/welcome.txt"
+    },
+    {
+        "name": "secret_schematics.pdf",
+        "type": "PDF",
+        "size": "4.2MB",
+        "url": "#"
+    },
+    {
+        "name": "cyber_tools.zip",
+        "type": "ZIP",
+        "size": "128MB",
+        "url": "#"
+    }
+]

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filesystem // Adir</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../webpage icon.png">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+    <!-- Main Content Area -->
+    <main class="content-wrapper">
+        <section class="file-system-container">
+            <header class="file-header">
+                <div class="file-path">
+                    C:\Users\Adir\Filesystem\<span class="current-dir">Files</span> >
+                </div>
+            </header>
+
+            <!-- Upload Zone -->
+            <div class="upload-zone">
+                <span class="upload-icon">📂</span>
+                <p>DROP FILES TO UPLOAD OR CLICK TO BROWSE</p>
+                <p style="font-size: 0.8rem; color: var(--text-dim); margin-top: 5px;">[ ENCRYPTED UPLINK ]</p>
+            </div>
+
+            <!-- File List -->
+            <div class="file-list" id="file-list">
+                <!-- Javascript will populate this -->
+                <div class="file-item" style="text-align: center; display: block; color: var(--text-dim);">
+                    LOADING_FILES...
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Global HUD / Footer -->
+    <footer class="global-hud">
+        <div class="hud-frame">
+
+            <!-- Left Side: Pages Menu -->
+            <div class="hud-module left">
+                <button id="pages-toggle" class="hud-btn pages-btn">
+                    <img src="../pages icon.png" alt="Pages" class="pages-icon-img">
+                </button>
+            </div>
+
+            <!-- Center: Status -->
+            <div class="hud-module center">
+                <span class="scrolling-text">FILESYSTEM ACCESS LOGGED ... SECURE CONNECTION ESTABLISHED ...</span>
+            </div>
+
+            <!-- Right Side: Navigation & Socials -->
+            <div class="hud-module right">
+                <div class="social-links">
+                    <a href="https://github.com/ImNullpo" target="_blank" class="social-icon" title="GitHub">
+                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                            fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                            </path>
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/adir-shabtai/" target="_blank" class="social-icon"
+                        title="LinkedIn">
+                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                            fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                            </path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                    </a>
+                    <a href="https://www.youtube.com/@ImNullpo" target="_blank" class="social-icon" title="YouTube">
+                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                            fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z">
+                            </path>
+                            <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                        </svg>
+                    </a>
+                    <div class="social-icon discord-trigger" title="Discord">
+                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                            fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M21.11 3.53c-1.63-.8-3.34-1.37-5.11-1.65-.24.4-.5.82-.7 1.25-1.9-.28-3.8-.28-5.7 0-.2-.42-.47-.85-.71-1.25-1.78.28-3.48.85-5.11 1.65C1.83 6.81.93 10.03 1.32 13.2c1.78 2.15 3.5 3.5 5.17 4.02.43-.58.82-1.2 1.17-1.85-1.47-.56-2.17-1.39-2.17-1.39.11-.08.23-.17.34-.25 3.96 1.83 8.24 1.83 12.16 0 .11.09.22.18.34.25 0 0-.71.84-2.18 1.4.35.65.73 1.27 1.16 1.85 1.67-.53 3.39-1.87 5.17-4.02.46-3.81-.8-7.39-2.61-9.67zM8.02 10.93c-1.12 0-2.04-1.03-2.04-2.3 0-1.27.91-2.3 2.04-2.3 1.14 0 2.05 1.03 2.05 2.3 0 1.27-.92 2.3-2.05 2.3zm7.96 0c-1.12 0-2.04-1.03-2.04-2.3 0-1.27.91-2.3 2.04-2.3 1.14 0 2.05 1.03 2.05 2.3 0 1.27-.92 2.3-2.05 2.3z">
+                            </path>
+                        </svg>
+                        <span class="discord-tag">ImNullpo</span>
+                    </div>
+                </div>
+
+                <!-- Right Side: Terminal Toggle -->
+                <button id="terminal-toggle" class="hud-btn" title="Open Terminal">
+                    <img src="../terminal icon.png" alt="Terminal">
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Overlay Areas -->
+    <div id="pages-menu" class="hidden">
+        <div class="pages-list">
+            <h3>// DIRECTORY</h3>
+            <ul>
+                <li><a href="../index.html">> HOME</a></li>
+                <li><a href="#" class="disabled">> BLOG [LOCKED]</a></li>
+                <li><a href="index.html">> FILES</a></li>
+
+                <li><a href="#" class="disabled">> PROJECTS [LOCKED]</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="filesystem.js"></script>
+    <!-- We can also reuse the main script for the HUD logic if we want, or copy the relevant parts. 
+         Creating a specific filesystem.js allows for custom logic but we need the HUD logic too. 
+         Let's just include the HUD logic in filesystem.js for simplicity or import it.
+         For now, I'll copy the HUD logic into filesystem.js to ensure it works standalone.
+    -->
+</body>
+
+</html>
