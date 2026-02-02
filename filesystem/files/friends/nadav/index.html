@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filesystem // nadav</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../../../../webpage icon.png">
+    <link rel="stylesheet" href="../../../../style.css">
+</head>
+<body>
+    <main class="content-wrapper">
+        <section class="file-system-container">
+            <header class="file-header">
+                <div class="file-path">
+                    C:\Users\Adir\Filesystem\Friends\<span class="current-dir">nadav</span> >
+                </div>
+            </header>
+            <div class="upload-zone">
+                <span class="upload-icon">📂</span>
+                <p>PRIVATE REPOSITORY</p>
+                <p style="font-size: 0.8rem; color: var(--text-dim); margin-top: 5px;">[ ACCESS GRANTED ]</p>
+            </div>
+            <div class="file-list" id="file-list">
+                <div class="file-item" style="text-align: center; display: block; color: var(--text-dim);">
+                    LOADING_FILES...
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="global-hud">
+        <div class="hud-frame">
+            <div class="hud-module left">
+               <a href="../../../../filesystem/index.html" class="hud-btn" style="text-decoration:none; display:flex; align-items:center; justify-content:center; color: var(--text-color);">
+                    &lt; BACK
+               </a>
+            </div>
+            <div class="hud-module center">
+                <span class="scrolling-text">CONNECTED TO NODE: NADAV ...</span>
+            </div>
+            <div class="hud-module right"></div>
+        </div>
+    </footer>
+    <!-- Point to the main filesystem.js which will load 'filelist.json' from THIS directory -->
+    <script src="../../../../filesystem/filesystem.js"></script>
+</body>
+</html>
