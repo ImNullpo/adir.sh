@@ -1,28 +1,7 @@
 [
     {
-        "name": "nadav",
-        "path": "nadav",
-        "type": "DIR",
-        "size": "-",
-        "children": []
-    },
-    {
-        "name": "personal",
-        "path": "personal",
-        "type": "DIR",
-        "size": "-",
-        "children": []
-    },
-    {
-        "name": "shachar",
-        "path": "shachar",
-        "type": "DIR",
-        "size": "-",
-        "children": []
-    },
-    {
-        "name": "yariv",
-        "path": "yariv",
+        "name": "family",
+        "path": "family",
         "type": "DIR",
         "size": "-",
         "children": []

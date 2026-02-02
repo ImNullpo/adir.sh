@@ -117,7 +117,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (file.type === 'DIR') {
                 actionButton = `<button class="action-btn btn-view" onclick="navigateDown('${file.name}')">OPEN</button>`;
             } else {
-                actionButton = `<a href="${file.url}" class="action-btn btn-download" download>↓ DL</a>`;
+                // For files: DL and OPEN
+                actionButton = `
+                    <a href="${file.url}" target="_blank" class="action-btn btn-view">OPEN</a>
+                    <a href="${file.url}" class="action-btn btn-download" download>↓ DL</a>
+                `;
             }
 
             // Layout: [Icon] [Name] [Type] [Size] [Actions]

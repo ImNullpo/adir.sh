@@ -22,9 +22,15 @@ def scan_directory(path, relative_base):
     if not os.path.exists(path):
         print(f"Warning: Directory not found: {path}")
         return []
+    
+    # Folders to exclude
+    IGNORED_ITEMS = {'personal', 'friends'}
 
     for entry in os.scandir(path):
         if entry.name.startswith('.'): # Skip hidden files
+            continue
+        
+        if entry.name.lower() in IGNORED_ITEMS:
             continue
             
         entry_data = {
