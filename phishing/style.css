@@ -1,0 +1,214 @@
+:root {
+    --text-color: #0f0;
+    --bg-color: #000;
+    --border-color: #0f0;
+    --danger-color: #f00;
+    --font-stack: 'VT323', monospace;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-stack);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-size: 1.2rem;
+}
+
+.terminal-container {
+    width: 90%;
+    max-width: 600px;
+    border: 2px solid var(--border-color);
+    padding: 20px;
+    box-shadow: 0 0 10px var(--border-color);
+    background-color: rgb(10, 10, 10);
+    position: relative;
+}
+
+/* Decorative corner pieces if we wanted more detail, but for now simple sharp borders */
+
+h1,
+h2 {
+    margin: 0;
+    font-weight: normal;
+    text-shadow: 0 0 5px var(--text-color);
+}
+
+h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    border-left: 5px solid var(--text-color);
+    padding-left: 10px;
+    margin-bottom: 15px;
+}
+
+.divider {
+    text-align: center;
+    margin: 15px 0;
+    opacity: 0.7;
+    letter-spacing: 2px;
+}
+
+.info-section p {
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+.blink {
+    animation: blinker 1.5s linear infinite;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
+.scanner-interface {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding: 5px;
+}
+
+.prompt {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+input[type="text"] {
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    font-family: var(--font-stack);
+    font-size: 1.2rem;
+    flex-grow: 1;
+    outline: none;
+}
+
+button {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    font-family: var(--font-stack);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    box-shadow: 0 0 15px var(--text-color);
+}
+
+.result-area {
+    margin-top: 25px;
+    padding: 15px;
+    border: 1px dashed var(--border-color);
+    min-height: 100px;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.result-area.hidden {
+    display: none;
+}
+
+/* Result Status Classes */
+.status-safe {
+    color: var(--text-color);
+    border: 2px solid var(--text-color);
+    background-color: rgba(0, 255, 0, 0.05);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+}
+
+.status-danger {
+    color: var(--danger-color);
+    border-color: var(--danger-color);
+    text-shadow: 0 0 5px var(--danger-color);
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
+}
+
+footer {
+    margin-top: 30px;
+    text-align: center;
+}
+
+footer a {
+    color: var(--text-color);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+footer a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
