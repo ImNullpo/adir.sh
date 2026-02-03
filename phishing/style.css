@@ -64,6 +64,30 @@ h2 {
     line-height: 1.4;
 }
 
+.ref-list {
+    list-style-type: none;
+    padding-left: 15px;
+    margin: 10px 0;
+}
+
+.ref-list li::before {
+    content: "> ";
+    color: var(--text-color);
+}
+
+.ref-list a {
+    color: var(--text-color);
+    text-decoration: none;
+    opacity: 0.8;
+    transition: all 0.2s;
+}
+
+.ref-list a:hover {
+    opacity: 1;
+    text-shadow: 0 0 8px var(--text-color);
+    text-decoration: underline;
+}
+
 .blink {
     animation: blinker 1.5s linear infinite;
 }
