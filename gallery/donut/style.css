@@ -1,0 +1,74 @@
+/* Global Reset & Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #0d0d0d;
+    color: #e0e0e0;
+    font-family: 'Courier New', Courier, monospace;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+    /* Subtle CRT Flicker setup */
+    animation: flicker 0.15s infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes flicker {
+    0% {
+        opacity: 0.97;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.98;
+    }
+}
+
+/* Donut Container - Centered */
+#donut-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#donut-display {
+    color: #ffbf00;
+    /* Amber */
+    text-shadow: 0 0 4px rgba(255, 191, 0, 0.6);
+    /* Font size and line height will be critical for "75%" sizing. 
+       We will control the actual "size" of the donut via JS logic (grid size), 
+       but font size helps. Let's make it responsive or just reasonably sized. */
+    font-size: 12px;
+    line-height: 12px;
+    white-space: pre;
+}
+
+/* CRT Scanlines Overlay */
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 0),
+            rgba(255, 255, 255, 0) 50%,
+            rgba(0, 0, 0, 0.2) 50%,
+            rgba(0, 0, 0, 0.2));
+    background-size: 100% 4px;
+    z-index: 999;
+    pointer-events: none;
+    opacity: 0.6;
+}

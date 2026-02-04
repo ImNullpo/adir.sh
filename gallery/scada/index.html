@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCADA TERMINAL V1.0</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="crt-overlay"></div>
+    <div class="container">
+        <!-- HEADER -->
+        <header class="system-bar">
+            <div class="left-col">
+                <span class="label">SYSTEM:</span> <span class="value">S7-400 PLC</span>
+                <span class="separator">|</span>
+                <span class="label">MODE:</span> <span id="plc-mode" class="value status-ok">RUN</span>
+            </div>
+            <div class="center-col">
+                <span class="label">HEARTBEAT:</span> <span id="heartbeat" class="blink">[●]</span>
+            </div>
+            <div class="right-col">
+                <span id="system-clock">00:00:00</span>
+            </div>
+        </header>
+
+        <!-- MAIN LAYOUT -->
+        <div class="main-interface">
+            <!-- SIDEBAR: DIGITAL I/O -->
+            <aside class="io-panel">
+                <div class="panel-header">DIGITAL INPUTS</div>
+                <ul id="input-list" class="io-list">
+                    <!-- Populated by JS -->
+                </ul>
+                <div class="panel-header">DIGITAL OUTPUTS</div>
+                <ul id="output-list" class="io-list">
+                    <!-- Populated by JS -->
+                </ul>
+            </aside>
+
+            <!-- CENTER: SCHEMATIC -->
+            <main class="schematic-view">
+                <div class="panel-header">PROCESS VIEW: REACTOR-01</div>
+                <pre id="process-graphic">
+      ________________       ________________
+     |                |     |                |
+     |   FEED TANK    |     |   ADDITIVE     |
+     |____.  .________|     |______.  .______|
+          |  |                     |  |
+          |  |                     |  |
+        <span id="v101" class="valve-control" onclick="scada.toggleValve('v101')">[X]</span> V-101             <span id="v102" class="valve-control" onclick="scada.toggleValve('v102')">[X]</span> V-102
+          |  |                     |  |
+          '--'--.  .---------------'  |
+                |  |                  |
+              <span id="v103" class="valve-control" onclick="scada.toggleValve('v103')">[X]</span> V-103            |
+                |  |                  |
+      __________v__v__________________v_______
+     /                                        \
+    |           MAIN REACTOR VESSEL            |
+    |                                          |
+    |     ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~      |
+    |                                          |
+     \________________________________________/
+                |   |
+              <span id="v104" class="valve-control" onclick="scada.toggleValve('v104')">[X]</span> V-104 (DRAIN)
+                |   |
+                v   v
+                OUT
+                </pre>
+
+                <div class="data-readouts">
+                    <div class="readout-box">
+                        <div class="label">PRESSURE</div>
+                        <div class="value"><span id="val-pressure">0.00</span> bar</div>
+                    </div>
+                    <div class="readout-box">
+                        <div class="label">TEMPERATURE</div>
+                        <div class="value"><span id="val-temp">00.0</span> °C</div>
+                    </div>
+                    <div class="readout-box">
+                        <div class="label">FLOW RATE</div>
+                        <div class="value"><span id="val-flow">0</span> m³/h</div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- FOOTER: TRENDS & LOGS -->
+        <footer class="bottom-panel">
+            <div class="trend-container">
+                <div class="panel-header">TREND: PRESSURE (30s)</div>
+                <pre id="trend-graph" class="ascii-graph"></pre>
+            </div>
+            <div class="log-container">
+                <div class="panel-header">DIAGNOSTIC BUFFER</div>
+                <div id="alarm-log" class="log-scroll">
+                    <!-- Logs go here -->
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

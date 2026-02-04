@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADIR.SH // GALLERY</title>
+    <style>
+        :root {
+            --term-green: #4af626;
+            --term-bg: #000;
+            --term-dim: #1a5c0d;
+            --scanf: rgba(0, 255, 0, 0.1);
+        }
+
+        body {
+            background-color: var(--term-bg);
+            color: var(--term-green);
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Scanline Overlay */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(0deg,
+                    rgba(0, 0, 0, 0.15),
+                    rgba(0, 0, 0, 0.15) 1px,
+                    transparent 1px,
+                    transparent 2px);
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid var(--term-green);
+            padding-bottom: 10px;
+            margin-bottom: 5px;
+            text-shadow: 0 0 5px var(--term-green);
+            font-size: 2rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 0.8rem;
+            margin-bottom: 40px;
+            opacity: 0.8;
+            letter-spacing: 1px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .art-box {
+            border: 1px solid var(--term-green);
+            padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--term-green);
+            transition: all 0.3s ease;
+            position: relative;
+            background: rgba(0, 20, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 150px;
+        }
+
+        .art-box:hover {
+            background: var(--term-green);
+            color: var(--term-bg);
+            box-shadow: 0 0 15px var(--term-green);
+            transform: translateY(-2px);
+        }
+
+        .art-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .art-desc {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .disclaimer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 0.7rem;
+            border-top: 1px dashed var(--term-dim);
+            padding-top: 20px;
+            color: var(--term-dim);
+        }
+
+        /* Back button */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--term-green);
+            text-decoration: none;
+            border: 1px solid var(--term-green);
+            padding: 5px 10px;
+        }
+
+        .back-link:hover {
+            background: var(--term-green);
+            color: #000;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="scanlines"></div>
+
+    <a href="../index.html" class="back-link">&lt; ROOT</a>
+
+    <h1>// SYSTEM.GALLERY</h1>
+    <div class="subtitle">AUTOMATED VISUAL GENERATION ARCHIVE</div>
+
+    <div class="gallery-grid">
+        <!-- DONUT -->
+        <a href="donut/index.html" class="art-box">
+            <div class="art-title">DONUT.EXE</div>
+            <div class="art-desc">3D Rotating Torus<br>[Math.sin/Math.cos]</div>
+        </a>
+
+        <!-- POWERPLANT -->
+        <a href="powerplant/index.html" class="art-box">
+            <div class="art-title">CHERNOBYL.SYS</div>
+            <div class="art-desc">Nuclear Reactor Simulation<br>[Particle System]</div>
+        </a>
+
+        <!-- RAIN -->
+        <a href="rain/index.html" class="art-box">
+            <div class="art-title">MATRIX.BAT</div>
+            <div class="art-desc">Digital Rain Storm<br>[Canvas2D]</div>
+        </a>
+
+        <!-- NULL -->
+        <a href="null/index.html" class="art-box">
+            <div class="art-title">NULL.VOID</div>
+            <div class="art-desc">Event Horizon Singularity<br>[Gravitational Physics]</div>
+        </a>
+
+        <!-- FISHTANK -->
+        <a href="fishtank/index.html" class="art-box">
+            <div class="art-title">AQUARIUM.SCR</div>
+            <div class="art-desc">Aquatic Life Simulation<br>[Procedural Motion]</div>
+        </a>
+    </div>
+
+    <div class="disclaimer">
+        WARNING: ALL CONTENT IN THIS SECTOR IS AI-GENERATED.<br>
+        PROCEDURAL ALGORITHMS // NEURAL SYNTHESIS // AUTOMATED ART
+    </div>
+
+</body>
+
+</html>

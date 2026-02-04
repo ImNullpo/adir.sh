@@ -1,0 +1,26 @@
+[
+  {
+    "name": "donut",
+    "path": "donut/"
+  },
+  {
+    "name": "fishtank",
+    "path": "fishtank/"
+  },
+  {
+    "name": "null",
+    "path": "null/"
+  },
+  {
+    "name": "powerplant",
+    "path": "powerplant/"
+  },
+  {
+    "name": "rain",
+    "path": "rain/"
+  },
+  {
+    "name": "scada",
+    "path": "scada/"
+  }
+]

@@ -1,0 +1,32 @@
+name: Update Gallery Index
+
+on:
+  push:
+    paths:
+      - 'gallery/**'
+      - '.github/workflows/gallery_indexer.yml'
+      - '!gallery/projects.json' # Avoid infinite loop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Run Gallery Indexer Script
+      run: python gallery/generate_gallery_json.py
+
+    - name: Commit and Push changes
+      run: |
+        git config --global user.name 'GitHub Action'
+        git config --global user.email 'action@github.com'
+        git add gallery/projects.json
+        # Only commit if there are changes
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update gallery index" && git push)
