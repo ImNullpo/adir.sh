@@ -30,7 +30,7 @@ class ScadaSystem {
 
     init() {
         this.log("SYSTEM BOOT SEQUENCE INITIATED...");
-        this.log("PLC CONNECTION ESTABLISHED (S7-400).");
+        this.log("PLC CONNECTION ESTABLISHED (S7-1500).");
         this.renderIO();
 
         // Start Loops
@@ -77,8 +77,9 @@ class ScadaSystem {
         // V101 (Feed) and V102 (Additive) allow flow IF V103 (Inlet) is also open
         // Simplified: V103 controls flow INTO the reactor based on V101/V102 presence
         if (this.state.valves.v103) {
-            if (this.state.valves.v101) flowIn += 50;
-            if (this.state.valves.v102) flowIn += 20;
+            // Add varied flow
+            if (this.state.valves.v101) flowIn += 50 + (Math.random() * 15 - 7.5);
+            if (this.state.valves.v102) flowIn += 20 + (Math.random() * 5 - 2.5);
         }
 
         if (this.state.valves.v104) {
@@ -106,11 +107,15 @@ class ScadaSystem {
         const targetTemp = 24 + (this.state.sensors.pressure * 5);
         this.state.sensors.temp += (targetTemp - this.state.sensors.temp) * 0.1;
 
-        // Add Noise
-        this.state.sensors.pressure += (Math.random() - 0.5) * this.config.noiseFactor;
+        // Add Noise / Random Walk
+        this.state.sensors.pressure += (Math.random() - 0.5) * 0.15;
         this.state.sensors.temp += (Math.random() - 0.5) * this.config.noiseFactor;
+
         this.state.sensors.flow = flowIn + (Math.random() * 2);
-        if (!this.state.valves.v103) this.state.sensors.flow = 0; // No flow reading if inlet closed
+        if (!this.state.valves.v103 && flowIn === 0) {
+            // Sensor noise even when closed
+            this.state.sensors.flow = Math.random() * 0.5;
+        }
 
         // 2. CHECK ALARMS
         this.checkAlarms();
@@ -240,18 +245,22 @@ class ScadaSystem {
         for (let x = 0; x < width; x++) {
             const val = this.state.history[x];
             // map val (0-10) to y (height-1 to 0)
-            const barHeight = Math.floor((val / maxVal) * height);
+            // map val (0-10) to y (height-1 to 0)
+            let barHeight = Math.floor((val / maxVal) * height);
+
+            // Ensure visibility for small values > 0.1
+            if (val > 0.1 && barHeight === 0) barHeight = 1;
 
             for (let y = 0; y < height; y++) {
                 // y=0 is top. y=height-1 is bottom.
                 // active area is from bottom up.
                 const invY = height - 1 - y;
-                if (invY < barHeight) {
-                    if (invY === barHeight - 1) {
-                        grid[y][x] = "."; // top of bar
-                    } else {
-                        grid[y][x] = ":"; // fill
-                    }
+
+                // Only draw the "point"
+                if (invY === barHeight - 1) {
+                    grid[y][x] = "•";
+                } else if (invY < barHeight - 1) {
+                    grid[y][x] = " ";
                 } else {
                     grid[y][x] = " ";
                 }

@@ -1,0 +1,326 @@
+/* --- Variables & Reset --- */
+:root {
+    --bg-color: #050505;
+    --text-main: #e0e0e0;
+    --text-dim: #888;
+    --accent: #00ff41;
+    --accent-dim: rgba(0, 255, 65, 0.2);
+    --border-color: #333;
+    --card-bg: rgba(20, 20, 20, 1);
+
+    --font-header: 'VT323', monospace;
+    --font-ui: 'Share Tech Mono', monospace;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-ui);
+    height: 100vh;
+    overflow: hidden;
+    /* Main vertical scroll handled by container if needed, but per design usually main content scrolls */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image:
+        linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+}
+
+/* --- Scanline Effect (Reused) --- */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 0) 50%,
+            rgba(0, 0, 0, 0.1) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+/* --- Layout Container --- */
+.main-container {
+    display: flex;
+    width: 95%;
+    max-width: 1200px;
+    height: 90vh;
+    border: 1px solid var(--text-dim);
+    background: #000;
+    position: relative;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+/* --- Top Bar Decor --- */
+.top-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 24px;
+    background: #222;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    color: var(--accent);
+    font-family: var(--font-header);
+    font-size: 1.1rem;
+    z-index: 10;
+}
+
+.top-bar-title {
+    font-weight: bold;
+}
+
+.top-bar-controls {
+    font-size: 0.8rem;
+}
+
+/* --- Sidebar (Left) --- */
+.sidebar {
+    width: 250px;
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    padding: 40px 20px 20px 20px;
+    /* Top padding accounts for top-bar */
+    background: #0a0a0a;
+    flex-shrink: 0;
+}
+
+.profile-section {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.pfp-frame {
+    width: 100%;
+    aspect-ratio: 1;
+    border: 1px solid var(--border-color);
+    background: #000;
+    margin-bottom: 1px;
+    overflow: hidden;
+    position: relative;
+}
+
+.pfp-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) contrast(1.2);
+    transition: filter 0.3s;
+}
+
+.pfp-frame:hover img {
+    filter: grayscale(0%) contrast(1);
+}
+
+.nav-section h3 {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    text-transform: uppercase;
+}
+
+.nav-links {
+    list-style: none;
+    padding-left: 10px;
+}
+
+.nav-links li {
+    margin-bottom: 5px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-main);
+    display: block;
+    padding: 2px 5px;
+    transition: all 0.2s;
+    border-left: 2px solid transparent;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--accent);
+    background: var(--accent-dim);
+    border-left-color: var(--accent);
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    border-top: 1px solid var(--border-color);
+    padding-top: 15px;
+}
+
+.sidebar-footer img {
+    max-width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid var(--border-color);
+}
+
+/* --- Main Content (Right) --- */
+.content-area {
+    flex: 1;
+    padding: 40px 20px 20px 20px;
+    overflow-y: auto;
+    background: #080808;
+
+    /* Scrollbar Styling */
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) #111;
+}
+
+.content-area::-webkit-scrollbar {
+    width: 8px;
+}
+
+.content-area::-webkit-scrollbar-track {
+    background: #111;
+}
+
+.content-area::-webkit-scrollbar-thumb {
+    background-color: var(--accent);
+    border: 1px solid #000;
+}
+
+/* --- Blog Post Layout --- */
+.blog-post {
+    margin-bottom: 4rem;
+    border: 1px solid var(--border-color);
+    background: #0c0c0c;
+}
+
+.post-header {
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid var(--border-color);
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-title {
+    color: var(--accent);
+    font-family: var(--font-header);
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.post-date {
+    background: var(--accent);
+    color: #000;
+    padding: 2px 6px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.post-body {
+    padding: 20px;
+    line-height: 1.6;
+    font-size: 1rem;
+    color: #ccc;
+}
+
+.post-body p {
+    margin-bottom: 1rem;
+}
+
+.post-body p:last-child {
+    margin-bottom: 0;
+}
+
+.highlight {
+    color: var(--accent);
+    background: rgba(0, 255, 65, 0.1);
+    padding: 0 4px;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+        height: auto;
+        min-height: 90vh;
+        width: 100%;
+        border: none;
+    }
+
+    .top-bar {
+        position: sticky;
+        top: 0;
+    }
+
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 40px 20px 20px 20px;
+    }
+
+    .pfp-frame {
+        width: 100px;
+        margin: 0 auto;
+    }
+
+    .profile-section {
+        text-align: center;
+    }
+
+    .content-area {
+        overflow-y: visible;
+    }
+}
+/* --- Dashed Button (adir.sh) --- */
+.sidebar-button-container {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.dashed-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 12px;
+    border: 1px dashed #fff;
+    text-decoration: none;
+    color: #fff;
+    font-family: var(--font-header);
+    font-size: 1.1rem;
+    background: #000;
+    width: 100%;
+    transition: all 0.2s ease;
+}
+
+.dashed-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(0, 255, 65, 0.05);
+}
+
+.dashed-btn img {
+    width: 20px;
+    height: auto;
+    object-fit: contain;
+    border: none !important;
+    margin-bottom: 0 !important;
+    image-rendering: pixelated;
+}
