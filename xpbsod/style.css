@@ -1,0 +1,21 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000082;
+    /* standard XP BSOD blue */
+    overflow: hidden;
+    /* Prevent scrollbars if image is large */
+    height: 100vh;
+    display: flex;
+    justify-content: flex-start;
+    /* Align image to the left */
+    align-items: flex-start;
+}
+
+.bsod-image {
+    height: 100vh;
+    /* Make image full height */
+    width: auto;
+    /* Maintain aspect ratio */
+    display: block;
+}

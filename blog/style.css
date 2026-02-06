@@ -32,6 +32,7 @@ body {
         linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
     background-size: 30px 30px;
+    animation: grid-drift 60s linear infinite;
 }
 
 /* --- Scanline Effect (Reused) --- */
@@ -288,6 +289,7 @@ body::before {
         overflow-y: visible;
     }
 }
+
 /* --- Dashed Button (adir.sh) --- */
 .sidebar-button-container {
     margin-bottom: 15px;
@@ -304,7 +306,7 @@ body::before {
     text-decoration: none;
     color: #fff;
     font-family: var(--font-header);
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     background: #000;
     width: 100%;
     transition: all 0.2s ease;
