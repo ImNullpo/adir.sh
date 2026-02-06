@@ -138,10 +138,9 @@
     <footer class="global-hud">
         <div class="hud-frame">
             <div class="hud-module left">
-                <a href="../index.html" class="hud-btn"
-                    style="text-decoration:none; display:flex; align-items:center; justify-content:center; color: var(--text-color);">
-                    &lt; EXIT
-                </a>
+                <button id="pages-toggle" class="hud-btn pages-btn">
+                    <img src="../pages icon.png" alt="Pages" class="pages-icon-img">
+                </button>
             </div>
             <div class="hud-module center">
                 <span class="scrolling-text">CONNECTING TO PUBLIC ARCHIVES ... PLEASE WAIT ...</span>
@@ -154,6 +153,23 @@
         </div>
     </footer>
 
+    <!-- Overlay Areas -->
+    <div id="pages-menu" class="hidden">
+        <div class="pages-list">
+            <h3>// DIRECTORY</h3>
+            <ul>
+                <li><a href="../index.html">> HOME</a></li>
+                <li><a href="#" class="disabled">> BLOG [LOCKED]</a></li>
+                <li><a href="../filesystem/index.html">> FILES</a></li>
+                <li><a href="../gallery/index.html">> GALLERY</a></li>
+                <li><a href="#">> LIBRARY (CURRENT)</a></li>
+                <li><a href="../projects/index.html">> PROJECTS</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Reusing main script for HUD logic -->
+    <script src="../script.js"></script>
     <script src="library.js"></script>
 </body>
 
