@@ -1,9 +1,16 @@
 [
     {
-        "name": "test_document.pdf",
-        "path": "test_document.pdf",
+        "name": "1st Global Research and Innovation Conference 2025 - Cyber security in industrial control systems.pdf",
+        "path": "1st Global Research and Innovation Conference 2025 - Cyber security in industrial control systems.pdf",
         "type": "PDF",
-        "size": "155.0 B",
-        "url": "files/test_document.pdf"
+        "size": "991.27 KB",
+        "url": "files/1st Global Research and Innovation Conference 2025 - Cyber security in industrial control systems.pdf"
+    },
+    {
+        "name": "Digital Twin-Driven Intrusion Detection.pdf",
+        "path": "Digital Twin-Driven Intrusion Detection.pdf",
+        "type": "PDF",
+        "size": "1.34 MB",
+        "url": "files/Digital Twin-Driven Intrusion Detection.pdf"
     }
 ]
