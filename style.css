@@ -234,24 +234,29 @@ a {
 .hud-module.center {
     flex: 1;
     justify-content: center;
-    opacity: 0.5;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     overflow: hidden;
     white-space: nowrap;
+    font-family: var(--font-ui);
+    letter-spacing: 2px;
 }
 
-.scrolling-text {
-    display: inline-block;
-    animation: scroll-text 15s linear infinite;
+.packet-counter {
+    color: var(--accent);
+    text-shadow: 0 0 5px var(--accent-dim);
+    font-weight: bold;
+    animation: pulse-glow 2s infinite alternate;
 }
 
-@keyframes scroll-text {
+@keyframes pulse-glow {
     from {
-        transform: translateX(100%);
+        text-shadow: 0 0 5px var(--accent-dim);
+        opacity: 0.8;
     }
 
     to {
-        transform: translateX(-100%);
+        text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent-dim);
+        opacity: 1;
     }
 }
 
@@ -280,11 +285,7 @@ a {
     object-fit: contain;
 }
 
-.hud-btn.pages-btn {
-    /* width: auto; */
-    /* padding: 0 10px; */
-    /* gap: 10px; */
-}
+/* .hud-btn.pages-btn was empty */
 
 .pages-icon-img {
     width: 24px;

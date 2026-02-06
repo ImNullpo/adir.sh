@@ -72,5 +72,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // --- Hit Counter ---
+    const counterElement = document.getElementById('packet-counter');
+    if (counterElement) {
+        fetch('https://api.counterapi.dev/v2/adirsh/website-counter-1/up')
+            .then(response => response.json())
+            .then(data => {
+                const count = data.count || 0;
+                const formattedCount = count.toString().padStart(6, '0');
+                counterElement.textContent = `PACKETS_RECEIVED: ${formattedCount}`;
+            })
+            .catch(error => {
+                console.error('[ ERROR ] Failed to intercept packets:', error);
+                counterElement.textContent = 'PACKETS: ERR';
+            });
+    }
+
     console.log("[ SYSTEM ] HUD Initialized.");
 });
